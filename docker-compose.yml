@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  mysql-db:
+    image: mysql:latest
+    container_name: mysql-db
+    ports:
+      - "3308:3306"
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345678900
+      - MYSQL_DATABASE=db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=12345678900
+    command:
+      - --character-set-server=utf8mb4
+    volumes:
+      - mysql-db-volume:/var/lib/mysql
+
+  api-server:
+    build:
+      context: ./server
+      target: srv-development
+    container_name: api-server
+    ports:
+      - "4000:4000"
+    restart: always
+    depends_on:
+      - mysql-db
+    volumes:
+      - ./server/src:/app/src
+    env_file:
+      - .env
+    environment:
+      - SYNC_DATA
+
+volumes:
+  mysql-db-volume:

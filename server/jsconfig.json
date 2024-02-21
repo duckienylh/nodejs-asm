@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": ["dom","es6"],
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "resolveJsonModule": true
+      },
+    "include": [
+      "routers/**/*",
+      "services/**/*",
+      "src/**/*"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+  }
